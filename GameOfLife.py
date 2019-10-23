@@ -62,14 +62,18 @@ def insertBoard(board, max_y, max_x):
     board = np.insert(board, max_y+1, 0, axis = 0)
     return board
 
-#Define board area
+#Define variables
 max_x = max_y = 50
+figsize_y = figsize_x = 5
+frames_sec = 25
+interval = 10
 #Define numpy arrays
 board = np.random.randint(2, size = (max_y, max_x))
 board = insertBoard(board, max_y, max_x)
 temp_board = board.copy()
 #Define matplotlib instances
-fig, ax = plt.subplots()
+fig = plt.figure(figsize = (figsize_y, figsize_x))
+ax = plt.axes()
 im = ax.imshow(board, cmap = mcolors.ListedColormap(['White', 'Black']))
 plt.axis('off')
 
@@ -86,5 +90,5 @@ def animate(i):
     return [im]
 
 #Draw board
-anim = animation.FuncAnimation(fig, animate, frames = 100, interval = 10, blit = False, repeat = True)
+anim = animation.FuncAnimation(fig, animate, frames = frames_sec, interval = interval, blit = False, repeat = True)
 plt.show()
