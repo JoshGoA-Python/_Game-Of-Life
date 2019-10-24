@@ -1,4 +1,5 @@
 ##UNDONE: Improve "insertBoard" function
+##UNDONE: Add grid
 
 #Import modules
 import numpy as np
