@@ -57,6 +57,7 @@ def selectCells(board):
 
 #Insert none valued arrays to board
 def insertBoard(board, max_y, max_x):
+    board = np.random.randint(2, size = (max_y, max_x))
     board = np.insert(board, 0, 0, axis = 1)
     board = np.insert(board, max_x+1, 0, axis = 1)
     board = np.insert(board, 0, 0, axis = 0)
@@ -69,9 +70,7 @@ figsize_y = figsize_x = 5
 frames_sec = 25
 interval = 10
 #Define numpy arrays
-board = np.random.randint(2, size = (max_y, max_x))
 board = insertBoard(board, max_y, max_x)
-temp_board = board.copy()
 #Define matplotlib instances
 fig = plt.figure(figsize = (figsize_y, figsize_x))
 ax = plt.axes()
