@@ -1,3 +1,4 @@
+#UNDONE: Improve "defBoard" function
 #UNDONE: Make grid
 
 #Import modules
@@ -8,6 +9,8 @@ import matplotlib.colors as mcolors
 
 #Board atributes (current_genBoard, next_genBoard, max_N)
 class board:
+
+    num_i = 0
 
     #Initialize boards with random integer numbers (0, 1) padded with 0
     def __init__(self, max_N):
@@ -30,6 +33,11 @@ class board:
                 #Save current cell atributes
                 current_cell = cell(boards, y, x)
                 self.reproduceBoard(current_cell, self.countNeighbors(current_cell))
+        boards.num_i += 1
+        cell.countCell()
+        ##### DEFINED DATA TO PLOT #####
+        #     print(cell.cellPer_i)    #
+        ################################
         return self.next_genBoard
 
     #Range current cells neighbors
@@ -64,6 +72,8 @@ class board:
 #Cell atributes (y, x, value)
 class cell:
 
+    cellPer_i = dict()
+
     #Initialize cell with position and value
     def __init__(self, boards, y, x):
         self.y = y
@@ -79,7 +89,7 @@ class cell:
                 tempCell = cell(boards, temp_y, temp_x)
                 if(tempCell.value == 1):
                     aliveCell_count += 1
-        return aliveCell_count
+        cell.cellPer_i[boards.num_i] = aliveCell_count
 
 #Board area
 max_N = 50
@@ -96,7 +106,7 @@ grid_show = True    #True False
 
 #Boards
 boards = board(max_N)
-#Animation
+#Game of Life animation
 fig, ax = plt.subplots(1, figsize = (figsize_N, figsize_N))
 im = ax.imshow(boards.next_genBoard, cmap = mcolors.ListedColormap(['White', 'Black']))
 plt.axis(axis_show)
@@ -108,4 +118,11 @@ def animate(i):
 
 #Draw board
 anim = animation.FuncAnimation(fig, animate, frames = fps, interval = interval, blit = False, repeat = True)
+plt.show()
+
+#Alive cell visualization animation
+plt.title('Alive cell visualization', fontsize = 10)
+
+#Draw alive cell data
+plt.plot(*zip(*sorted(cell.cellPer_i.items())))
 plt.show()
