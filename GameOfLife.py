@@ -45,16 +45,6 @@ def alive_cell(current_cell, neighbors, board):
     else:
         board[current_cell.y, current_cell.x] = 0
 
-#Manually select cell position (y*x)
-def selectCells(board):
-    max_cells = int(input("Input max_cells: "))
-    for select in range(0, max_cells):
-        select_y, select_x = input(str(select + 1) + ": ").split("*")
-        select_y = int(select_y) + 1
-        select_x = int(select_x) + 1
-        board[select_y, select_x] = 1
-    return board
-
 #Insert none valued arrays to board
 def insertBoard(board, max_y, max_x):
     board = np.insert(board, 0, 0, axis = 1)
