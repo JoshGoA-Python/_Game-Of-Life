@@ -20,9 +20,9 @@ class cell
     cellPer_i = dict()
 ```
 1. Board class:
-Each board initializes itself with a previously randomly created temporal board
-   - current_genBoard: board containing current generation cells (one to be ranged)
-   - next_genBoard: board containing next generation cells (reproduction changes stored here)
+   - Each board initializes itself with a previously randomly created temporal board
+     - current_genBoard: board containing current generation cells (one to be ranged)
+     - next_genBoard: board containing next generation cells (reproduction changes stored here)
 ```python
 def __init__(self, max_N):
     temp_board = np.random.randint(2, size = (max_N, max_N))
@@ -31,13 +31,13 @@ def __init__(self, max_N):
     self.next_genBoard = temp_board.copy()
     self.max_N = max_N
 ```
-Save cell reproduction changes and advance one generation
+   - Save cell reproduction changes and advance one generation
 ```python
 def advanceGen(self):
     self.current_genBoard = self.next_genBoard.copy()
 ```
-Range current generation board and return reproduced cell changes of next generation board whilist
-   - current_cell: current cell atributes
+   - Range current generation board and return reproduced cell changes of next generation board whilist
+     - current_cell: current cell atributes
 ```python
 def rangeBoard(self):
     self.advanceGen()
@@ -49,9 +49,9 @@ def rangeBoard(self):
     cell.countCell()
     return self.next_genBoard
 ```
-Count number of alive neighbors and returns that value
-   - count_neighbors: number of alive neighbors
-   - neighbor_cell: neighbor cell atributes
+   - Count number of alive neighbors and returns that value
+     - count_neighbors: number of alive neighbors
+     - neighbor_cell: neighbor cell atributes
 ```python
 def countNeighbors(self, current_cell):
     count_neighbors = 0
@@ -63,11 +63,11 @@ def countNeighbors(self, current_cell):
                     count_neighbors += 1
     return count_neighbors
 ```
-Reproduce board
-   - Any live cell with fewer than two live neighbours dies, as if by underpopulation
-   - Any live cell with two or three live neighbours lives on to the next generation
-   - Any live cell with more than three live neighbours dies, as if by overpopulation
-   - Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction
+   - Reproduce board
+     - Any live cell with fewer than two live neighbours dies, as if by underpopulation
+     - Any live cell with two or three live neighbours lives on to the next generation
+     - Any live cell with more than three live neighbours dies, as if by overpopulation
+     - Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction
 ```python
 def reproduceBoard(self, current_cell, count_neighbors):
     if(current_cell.value == 0):
@@ -82,14 +82,14 @@ def reproduceBoard(self, current_cell, count_neighbors):
             self.next_genBoard[current_cell.y, current_cell.x] = 0
 ```
 2. Cell class:
-Each cell initializes itself with its position and value
+   - Each cell initializes itself with its position and value
 ```python
 def __init__(self, boards, y, x):
     self.y = y
     self.x = x
     self.value = boards.current_genBoard[self.y, self.x]
 ```
-Static method to count number of alive cell in current generation board and store it in "cellPer_i"
+   - Static method to count number of alive cell in current generation board and store it in "cellPer_i"
 ```python
 @staticmethod
 def countCell():
