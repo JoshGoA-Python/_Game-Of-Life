@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import matplotlib.colors as mcolors
 ```
-Defin board and cell objects
+Define board and cell objects
 - Board counts number of generations with "num_gen" class variable
 - Cell stores number of living cells in each generation with "cellPer_i class" variable
 ```python
@@ -80,4 +80,24 @@ def reproduceBoard(self, current_cell, count_neighbors):
             self.next_genBoard[current_cell.y, current_cell.x] = 1
         else:
             self.next_genBoard[current_cell.y, current_cell.x] = 0
+```
+2. Cell class:
+Each cell initializes itself with its position and value
+```python
+def __init__(self, boards, y, x):
+    self.y = y
+    self.x = x
+    self.value = boards.current_genBoard[self.y, self.x]
+```
+Static method to count number of alive cell in current generation board and store it in "cellPer_i"
+```python
+@staticmethod
+def countCell():
+    aliveCell_count = 0
+    for temp_y in range(1, boards.max_N+1):
+        for temp_x in range(1, boards.max_N+1):
+            tempCell = cell(boards, temp_y, temp_x)
+            if(tempCell.value == 1):
+                aliveCell_count += 1
+    cell.cellPer_i[boards.num_gen] = aliveCell_count
 ```
