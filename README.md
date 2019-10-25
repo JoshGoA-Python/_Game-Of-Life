@@ -19,7 +19,27 @@ class board
 class cell
     cellPer_i = dict()
 ```
-1. Board class:
+1. Variables
+   - Define variables
+     - max_N: board area
+     - figsize_N: figure area
+     - fps: animation frames per second
+     - interval: animation interval
+     - axis_show: show axis ('on', 'off')
+     - grid_show: show grid (True, False)
+     - fig, ax: figure and axis
+```python
+max_N = 50
+figsize_N = 5
+fps = 100
+interval = 10
+axis_show = 'off'
+grid_show = True
+fig, ax = plt.subplots(1, figsize = (figsize_N, figsize_N))
+im = ax.imshow(boards.next_genBoard, cmap = mcolors.ListedColormap(['White', 'Black']))
+```
+
+2. Board class:
    - Each board initializes itself with a previously randomly created temporal board
      - current_genBoard: board containing current generation cells (one to be ranged)
      - next_genBoard: board containing next generation cells (reproduction changes stored here)
@@ -81,7 +101,7 @@ def reproduceBoard(self, current_cell, count_neighbors):
         else:
             self.next_genBoard[current_cell.y, current_cell.x] = 0
 ```
-2. Cell class:
+3. Cell class:
    - Each cell initializes itself with its position and value
 ```python
 def __init__(self, boards, y, x):
@@ -100,4 +120,19 @@ def countCell():
             if(tempCell.value == 1):
                 aliveCell_count += 1
     cell.cellPer_i[boards.num_gen] = aliveCell_count
+```
+4. Animation
+   - Game of Life animation
+```python
+def animate(i):
+    im.set_data(boards.rangeBoard())
+    return [im]
+anim = animation.FuncAnimation(fig, animate, frames = fps, interval = interval, blit = False, repeat = True)
+plt.show()
+```
+   - Alive cell data plot visualization
+```python
+plt.title('Alive cell visualization', fontsize = 10)
+plt.plot(*zip(*sorted(cell.cellPer_i.items())))
+plt.show()
 ```
