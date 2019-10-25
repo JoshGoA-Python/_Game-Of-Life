@@ -1,4 +1,4 @@
-# Game-Of-Life
+# GAME OF LIFE
 Game Of Life algorithm visualization
 
-UNDER CONSTRUCTION
+**CODE EXPLANATION**
