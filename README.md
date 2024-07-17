@@ -1,5 +1,6 @@
-# GAME OF LIFE
-Game Of Life algorithm visualization
+# game-of-life
+
+> Simple Game of Life visualization
 
 **CODE EXPLANATION**
 
